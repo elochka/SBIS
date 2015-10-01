@@ -7,7 +7,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-class SimplisticTest(unittest.TestCase):
+class LoginPageTest(unittest.TestCase):
     def test(self):
         logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.INFO)
         driver = webdriver.Chrome()
