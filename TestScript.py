@@ -9,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 class SimplisticTest(unittest.TestCase):
     def test(self):
         #задали формат записи лога
-        # logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.INFO)
+        logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.INFO)
         driver = webdriver.Chrome()
         driver.get("http://fix-inside.tensor.ru")
         time.sleep(5)
