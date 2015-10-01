@@ -25,3 +25,4 @@ assert "СБИС" in driver.title
 
 logging.info ("Login was successfull")
 driver.close()
+
