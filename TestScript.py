@@ -2,6 +2,7 @@ __author__ = 'Asus'
 
 import unittest
 from LoginPage import LoginPage
+from SbisPage import SbisPage
 import logging
 import time
 from selenium import webdriver
@@ -15,14 +16,26 @@ class LoginPageTest(unittest.TestCase):
         logging.info("Loading login page.")
         time.sleep(5)
         self.assertEqual("Вход в систему/СБИС", driver.title)
-        LogPage = LoginPage(driver)
-        LogPage.getLoginField().send_keys("check_rigth_user")
-        LogPage.getPasswordInput().send_keys("qwerty123")
-        LogPage.getloginButton().click()
+        logPage = LoginPage(driver)
+        logPage.getLoginField().send_keys("check_rigth_user")
+        logPage.getPasswordInput().send_keys("qwerty123")
+        logPage.getloginButton().click()
         logging.info("Login process started")
         time.sleep(5) #wait for next page load
         self.assertEqual("СБИС", driver.title)
         logging.info("Login was successfull")
+        time.sleep(5)
+
+        sbisPage = SbisPage(driver)
+        sbisPage.getstaffLink().click()
+        time.sleep(2)
+        sbisPage.getstaffLink().click()
+        time.sleep(5)
+        self.assertEqual("Сотрудники/СБИС", driver.title)
+        logging.info("Staff page opened")
+
+
+
         driver.close()
 
 if __name__ == '__main__':
