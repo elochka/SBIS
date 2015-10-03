@@ -1,5 +1,5 @@
 __author__ = 'Asus'
-class SbisPage:
+class MainPage:
     def __init__(self, driver, staffLink='div[data-id="staff"] > a'):
         self.driver = driver
         self.staffLink = staffLink

@@ -2,7 +2,8 @@ __author__ = 'Asus'
 
 import unittest
 from LoginPage import LoginPage
-from SbisPage import SbisPage
+from MainPage import MainPage
+from StaffPage import StaffPage
 import logging
 import time
 from selenium import webdriver
@@ -26,13 +27,21 @@ class LoginPageTest(unittest.TestCase):
         logging.info("Login was successfull")
         time.sleep(5)
 
-        sbisPage = SbisPage(driver)
-        sbisPage.getstaffLink().click()
+        mainPage = MainPage(driver)
+        mainPage.getstaffLink().click()
         time.sleep(2)
-        sbisPage.getstaffLink().click()
+        mainPage.getstaffLink().click()
         time.sleep(5)
         self.assertEqual("Сотрудники/СБИС", driver.title)
         logging.info("Staff page opened")
+
+        staffPage = StaffPage(driver)
+        staffPage.getorgLink().click()
+        time.sleep(5)
+        logging.info("Organizations list opened")
+
+
+
 
 
 
