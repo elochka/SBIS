@@ -5,10 +5,13 @@ class LoginPage:
         self.loginField = loginField
         self.passwordField = passwordField
         self.loginButton = loginButton
+
     def getLoginField(self):
         return self.driver.find_element_by_css_selector(self.loginField)
+
     def getPasswordInput(self):
         return self.driver.find_element_by_css_selector(self.passwordField)
+
     def getloginButton(self):
         return self.driver.find_element_by_css_selector(self.loginButton)
 

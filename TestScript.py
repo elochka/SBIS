@@ -8,6 +8,7 @@ import logging
 import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
 
 class LoginPageTest(unittest.TestCase):
     def setUp(self):
@@ -22,11 +23,21 @@ class LoginPageTest(unittest.TestCase):
 
     def waitAndClosePopup(self):
         mainPage = MainPage(self.driver)
-        self.wait10sec.until(lambda _: len(mainPage.getClosePopupLinks()) > 0)
-        for link in mainPage.getClosePopupLinks():
-            logging.info("Popup was closed")
-            link.click()
-            time.sleep(1)
+        try:
+            self.wait10sec.until(lambda _: len(mainPage.getClosePopupLinks()) > 0)
+            for link in mainPage.getClosePopupLinks():
+                logging.info("Popup was closed")
+                link.click()
+                time.sleep(1)
+        except:
+            pass
+
+    # https://stackoverflow.com/questions/27948420/click-at-at-an-arbitrary-position-in-web-browser-with-selenium-2-python-binding
+    def forceClick(self, element, xoffset=5, yoffset=5):
+        action = ActionChains(self.driver)
+        action.move_to_element_with_offset(element, xoffset, yoffset)
+        action.click()
+        action.perform()
 
 
     def test_main(self):
@@ -42,15 +53,16 @@ class LoginPageTest(unittest.TestCase):
         self.log.info("Login process started")
         time.sleep(5)
         self.assertEqual("СБИС", self.driver.title)
-        self.log.info("Login was successfull")
+        self.log.info("Login was successful")
 
         self.waitAndClosePopup()
 
         mainPage = MainPage(self.driver)
-        mainPage.getstaffLink().click()
+        self.forceClick(mainPage.getstaffLink())
         time.sleep(2)
-        mainPage.getstaffLink().click()
-        time.sleep(5)
+        self.forceClick(mainPage.getstaffLink())
+
+        time.sleep(10)
         self.assertEqual("Сотрудники/СБИС", self.driver.title)
         self.log.info("Staff page opened")
 
@@ -59,6 +71,7 @@ class LoginPageTest(unittest.TestCase):
         staffPage.getorgLink().click()
         time.sleep(5)
         self.log.info("Organizations list opened")
+        #orgList = staffPage.getorgForm()
         # проверка: открылась форма с подразделениями
 
 
