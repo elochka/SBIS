@@ -70,9 +70,9 @@ class LoginPageTest(unittest.TestCase):
         #firstName = staffPage.getorgLink().text()
         staffPage.getorgLink().click()
         time.sleep(5)
+        self.assertEqual(staffPage.isOrgFormVisible(), True)
         self.log.info("Organizations list opened")
-        #orgList = staffPage.getorgForm()
-        # проверка: открылась форма с подразделениями
+
 
 
 if __name__ == '__main__':
