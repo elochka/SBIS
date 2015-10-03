@@ -59,19 +59,27 @@ class LoginPageTest(unittest.TestCase):
 
         mainPage = MainPage(self.driver)
         self.forceClick(mainPage.getstaffLink())
-        time.sleep(2)
+        time.sleep(5)
         self.forceClick(mainPage.getstaffLink())
-
         time.sleep(10)
         self.assertEqual("Сотрудники/СБИС", self.driver.title)
         self.log.info("Staff page opened")
 
         staffPage = StaffPage(self.driver)
-        #firstName = staffPage.getorgLink().text()
+        link = staffPage.getorgLink()
+        firstName = link.text
         staffPage.getorgLink().click()
         time.sleep(5)
         self.assertEqual(staffPage.isOrgFormVisible(), True)
         self.log.info("Organizations list opened")
+
+        staffPage.getchangeOrg().click()
+        time.sleep(5)
+        secondName = staffPage.getorgLink().text
+        self.assertNotEqual(firstName, secondName)
+        self.log.info("Link name was changed")
+
+
 
 
 
