@@ -79,6 +79,17 @@ class LoginPageTest(unittest.TestCase):
         self.assertNotEqual(firstName, secondName)
         self.log.info("Link name was changed")
 
+        staffPage.getsearchField().send_keys("Белова Олеся Александровна")
+        time.sleep(5)
+        self.assertIn("Белова Олеся", staffPage.getemployeeResult().text)
+        self.log.info("Employee found")
+
+
+
+
+
+
+
 
 
 
