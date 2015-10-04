@@ -19,18 +19,20 @@ class LoginPageTest(unittest.TestCase):
         self.log = logging.getLogger(__name__)
         self.log.setLevel(logging.DEBUG)
 
-        fh = logging.FileHandler('test.log')
-        fh.setLevel(logging.DEBUG)
+        fileHandler = logging.FileHandler('test.log')
+        fileHandler.setLevel(logging.DEBUG)
 
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.WARN)
+        consoleHandler = logging.StreamHandler()
+        consoleHandler.setLevel(logging.DEBUG)
 
         formatter = logging.Formatter(u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s')
-        ch.setFormatter(formatter)
-        fh.setFormatter(formatter)
+        consoleHandler.setFormatter(formatter)
+        fileHandler.setFormatter(formatter)
+
+        self.log.addHandler(consoleHandler)
+        self.log.addHandler(fileHandler)
 
         self.driver = webdriver.Chrome()
-        #self.driver.set_window_size(1280, 1024)
         self.wait10sec = WebDriverWait(self.driver, 10)
 
     def tearDown(self):
@@ -45,7 +47,7 @@ class LoginPageTest(unittest.TestCase):
                 link.click()
                 time.sleep(1)
         except:
-            pass
+            logging.info("Popup was not found")
 
     # https://stackoverflow.com/questions/27948420/click-at-at-an-arbitrary-position-in-web-browser-with-selenium-2-python-binding
     def forceClick(self, element, xoffset=5, yoffset=5):
@@ -53,7 +55,6 @@ class LoginPageTest(unittest.TestCase):
         action.move_to_element_with_offset(element, xoffset, yoffset)
         action.click()
         action.perform()
-
 
     def test_main(self):
         self.driver.get("http://fix-inside.tensor.ru")
@@ -76,7 +77,7 @@ class LoginPageTest(unittest.TestCase):
         self.forceClick(mainPage.getstaffLink())
         time.sleep(5)
         self.forceClick(mainPage.getstaffLink())
-        time.sleep(20)
+        time.sleep(20) # на моём ноутбуке страница грузится очень долго
         self.assertEqual("Сотрудники/СБИС", self.driver.title)
         self.log.info("Staff page was opened")
 
@@ -115,12 +116,11 @@ class LoginPageTest(unittest.TestCase):
         self.log.info("User menu was opened")
 
         staffPage.getlogOutLink().click()
-        time.sleep(20)
+        time.sleep(5)
         self.assertEqual("Вход в систему/СБИС", self.driver.title)
         self.log.info("Logout was successful")
 
         time.sleep(5)
-
 
 if __name__ == '__main__':
     unittest.main()

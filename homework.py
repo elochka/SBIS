@@ -1,10 +1,12 @@
 __author__ = 'Asus'
 
-from LoginPage import LoginPage
 import logging
 import time
+
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+
+from LoginPage import LoginPage
+
 
 #задали формат записи лога
 logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.INFO)
