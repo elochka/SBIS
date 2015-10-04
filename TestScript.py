@@ -61,7 +61,7 @@ class LoginPageTest(unittest.TestCase):
         self.forceClick(mainPage.getstaffLink())
         time.sleep(5)
         self.forceClick(mainPage.getstaffLink())
-        time.sleep(10)
+        time.sleep(20)
         self.assertEqual("Сотрудники/СБИС", self.driver.title)
         self.log.info("Staff page was opened")
 
@@ -85,9 +85,23 @@ class LoginPageTest(unittest.TestCase):
         self.log.info("Employee was found")
 
         staffPage.getemployeeResult().click()
-        time.sleep(5)
+        time.sleep(10)
         self.assertEqual(staffPage.isEmployeeCardVisible(), True)
         self.log.info("Employee card was opened")
+
+        staffPage.getcloseCardButton().click()
+        time.sleep(5)
+        self.assertEqual(staffPage.isEmployeeCardVisible(), False)
+        self.log.info("Employee card was closed")
+
+        staffPage.getuserNameLink().click()
+        time.sleep(5)
+        self.assertEqual(staffPage.isUserMenuVisible(), True)
+        self.log.info("User menu was opened")
+
+
+
+
 
 
 

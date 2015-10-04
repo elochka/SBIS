@@ -1,7 +1,7 @@
 __author__ = 'Asus'
 # поскольку изначально у меня всегда отображается ссылка "Наша компания", выбираем для проверки пункт "Все юридические лица"
 class StaffPage:
-    def __init__(self, driver, orgLink = "#ourOrg", orgForm = "div[title='Выберите организацию']", changeOrg = "div[title='Все юридические лица']", searchField = "#fld-searchStaff", employeeResult = "div[class='listEmplInfoBlock ']", employeeCard = "div[class='staff-CardEmployee ws-component ws-area ws-init-done ws-disabled']"):
+    def __init__(self, driver, orgLink = "#ourOrg", orgForm = "div[title='Выберите организацию']", changeOrg = "div[title='Все юридические лица']", searchField = "#fld-searchStaff", employeeResult = "div.listEmplInfoBlock", employeeCard = "div.staff-CardEmployee", closeCardButton = "div.sbisname-window-title-close.ws-float-close-right", userNameLink = "div.username__link", userMenu = "div.big.auth"):
         self.driver = driver
         self.orgLink = orgLink
         self.orgForm  = orgForm
@@ -9,6 +9,9 @@ class StaffPage:
         self.searchField = searchField
         self.employeeResult = employeeResult
         self.employeeCard = employeeCard
+        self.closeCardButton = closeCardButton
+        self.userNameLink = userNameLink
+        self.userMenu = userMenu
 
     def getorgLink(self):
         return self.driver.find_element_by_css_selector(self.orgLink)
@@ -30,3 +33,12 @@ class StaffPage:
 
     def isEmployeeCardVisible(self):
         return len(self.driver.find_elements_by_css_selector(self.employeeCard)) > 0
+
+    def getcloseCardButton(self):
+        return self.driver.find_element_by_css_selector(self.closeCardButton)
+
+    def getuserNameLink(self):
+        return self.driver.find_element_by_css_selector(self.userNameLink)
+
+    def isUserMenuVisible(self):
+        return len(self.driver.find_elements_by_css_selector(self.userMenu)) > 0
