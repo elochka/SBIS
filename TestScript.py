@@ -50,7 +50,7 @@ class LoginPageTest(unittest.TestCase):
         logPage.getLoginField().send_keys("check_rigth_user")
         logPage.getPasswordInput().send_keys("qwerty123")
         logPage.getloginButton().click()
-        self.log.info("Login process started")
+        self.log.info("Login process was started")
         time.sleep(5)
         self.assertEqual("СБИС", self.driver.title)
         self.log.info("Login was successful")
@@ -63,7 +63,7 @@ class LoginPageTest(unittest.TestCase):
         self.forceClick(mainPage.getstaffLink())
         time.sleep(10)
         self.assertEqual("Сотрудники/СБИС", self.driver.title)
-        self.log.info("Staff page opened")
+        self.log.info("Staff page was opened")
 
         staffPage = StaffPage(self.driver)
         link = staffPage.getorgLink()
@@ -71,7 +71,7 @@ class LoginPageTest(unittest.TestCase):
         staffPage.getorgLink().click()
         time.sleep(5)
         self.assertEqual(staffPage.isOrgFormVisible(), True)
-        self.log.info("Organizations list opened")
+        self.log.info("Organizations list was opened")
 
         staffPage.getchangeOrg().click()
         time.sleep(5)
@@ -82,7 +82,15 @@ class LoginPageTest(unittest.TestCase):
         staffPage.getsearchField().send_keys("Белова Олеся Александровна")
         time.sleep(5)
         self.assertIn("Белова Олеся", staffPage.getemployeeResult().text)
-        self.log.info("Employee found")
+        self.log.info("Employee was found")
+
+        staffPage.getemployeeResult().click()
+        time.sleep(5)
+        self.assertEqual(staffPage.isEmployeeCardVisible(), True)
+        self.log.info("Employee card was opened")
+
+
+
 
 
 
