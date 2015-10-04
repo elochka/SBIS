@@ -103,29 +103,11 @@ class LoginPageTest(unittest.TestCase):
         self.log.info("User menu was opened")
 
         staffPage.getlogOutLink().click()
-        time.sleep(15)
+        time.sleep(20)
         self.assertEqual("Вход в систему/СБИС", self.driver.title)
         self.log.info("Logout was successful")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        time.sleep(5)
 
 
 if __name__ == '__main__':

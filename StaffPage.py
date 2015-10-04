@@ -1,7 +1,7 @@
 __author__ = 'Asus'
 # поскольку изначально у меня всегда отображается ссылка "Наша компания", выбираем для проверки пункт "Все юридические лица"
 class StaffPage:
-    def __init__(self, driver, orgLink = "#ourOrg", orgForm = "div[title='Выберите организацию']", changeOrg = "div[title='Все юридические лица']", searchField = "#fld-searchStaff", employeeResult = "div.listEmplInfoBlock", employeeCard = "div.staff-CardEmployee", closeCardButton = "div.sbisname-window-title-close.ws-float-close-right", userNameLink = "div.username__link", userMenu = "div.big.auth", logOutLink = "div.log"):
+    def __init__(self, driver, orgLink = "#ourOrg", orgForm = "div[title='Выберите организацию']", changeOrg = "div[title='Все юридические лица']", searchField = "#fld-searchStaff", employeeResult = "div.listEmplInfoBlock", employeeCard = "div.staff-CardEmployee", closeCardButton = "div.sbisname-window-title-close.ws-float-close-right", userNameLink = "div.username__link", userMenu = "div.big.auth", logOutLink = "div.log > div"):
         self.driver = driver
         self.orgLink = orgLink
         self.orgForm  = orgForm
