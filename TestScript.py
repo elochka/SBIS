@@ -15,8 +15,20 @@ from StaffPage import StaffPage
 
 class LoginPageTest(unittest.TestCase):
     def setUp(self):
-        logging.basicConfig(format=u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s', level = logging.INFO)
+        # https://docs.python.org/2/howto/logging-cookbook.html#multiple-handlers-and-formatters
         self.log = logging.getLogger(__name__)
+        self.log.setLevel(logging.DEBUG)
+
+        fh = logging.FileHandler('test.log')
+        fh.setLevel(logging.DEBUG)
+
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.WARN)
+
+        formatter = logging.Formatter(u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s')
+        ch.setFormatter(formatter)
+        fh.setFormatter(formatter)
+
         self.driver = webdriver.Chrome()
         #self.driver.set_window_size(1280, 1024)
         self.wait10sec = WebDriverWait(self.driver, 10)
