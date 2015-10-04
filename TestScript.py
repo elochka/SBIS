@@ -1,14 +1,17 @@
 __author__ = 'Asus'
 
 import unittest
-from LoginPage import LoginPage
-from MainPage import MainPage
-from StaffPage import StaffPage
 import logging
 import time
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
+
+from LoginPage import LoginPage
+from MainPage import MainPage
+from StaffPage import StaffPage
+
 
 class LoginPageTest(unittest.TestCase):
     def setUp(self):
@@ -98,6 +101,15 @@ class LoginPageTest(unittest.TestCase):
         time.sleep(5)
         self.assertEqual(staffPage.isUserMenuVisible(), True)
         self.log.info("User menu was opened")
+
+        staffPage.getlogOutLink().click()
+        time.sleep(15)
+        self.assertEqual("Вход в систему/СБИС", self.driver.title)
+        self.log.info("Logout was successful")
+
+
+
+
 
 
 
