@@ -37,6 +37,7 @@ class LoginPageTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
+        self.driver.quit()
 
     def waitAndClosePopup(self):
         mainPage = MainPage(self.driver)
@@ -120,7 +121,7 @@ class LoginPageTest(unittest.TestCase):
         self.assertEqual("Вход в систему/СБИС", self.driver.title)
         self.log.info("Logout was successful")
 
-        time.sleep(5)
+        time.sleep(10)
 
 if __name__ == '__main__':
     unittest.main()
